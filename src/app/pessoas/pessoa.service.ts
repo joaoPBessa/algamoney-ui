@@ -4,6 +4,7 @@ import { URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
+import { environment } from 'environments/environment';
 
 export class PessoaFiltro {
   nome: string;
@@ -14,9 +15,11 @@ export class PessoaFiltro {
 @Injectable()
 export class PessoaService {
 
-  pessoasUrl = 'http://localhost:8080/pessoas';
+  pessoasUrl: string;
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp) {
+    this.pessoasUrl = `${environment.apiUrl}/pessoas`;
+  }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
     const params = new URLSearchParams();
